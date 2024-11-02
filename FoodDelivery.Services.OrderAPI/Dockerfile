@@ -3,23 +3,46 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
 WORKDIR /app
 
 # Copiar el archivo .csproj específico y restaurar dependencias
-COPY ./FoodDelivery.Services.OrderAPI.csproj ./
-RUN dotnet restore "./FoodDelivery.Services.OrderAPI.csproj"
+COPY FoodDelivery.Services.OrderAPI.csproj ./
+RUN dotnet restore
 
-# Copiar todo el resto del código del microservicio
-COPY ./ ./
-
-# Compilar y publicar el código
-WORKDIR /app
-RUN dotnet publish -c Release -o out
+# Copiar el resto del código y compilar
+COPY . ./
+RUN dotnet publish -c Release -o /out
 
 # Etapa de runtime
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
-COPY --from=build-env /app/out .
+COPY --from=build-env /out .
 
 # Exponer puerto
 EXPOSE 7004
 
 # Ejecutar la aplicación
 ENTRYPOINT ["dotnet", "FoodDelivery.Services.OrderAPI.dll"]
+
+## Etapa de construcción
+#FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
+#WORKDIR /app
+#
+## Copiar el archivo .csproj específico y restaurar dependencias
+#COPY ./FoodDelivery.Services.OrderAPI.csproj ./
+#RUN dotnet restore "./FoodDelivery.Services.OrderAPI.csproj"
+#
+## Copiar todo el resto del código del microservicio
+#COPY ./ ./
+#
+## Compilar y publicar el código
+#WORKDIR /app
+#RUN dotnet publish -c Release -o out
+#
+## Etapa de runtime
+#FROM mcr.microsoft.com/dotnet/aspnet:8.0
+#WORKDIR /app
+#COPY --from=build-env /app/out .
+#
+## Exponer puerto
+#EXPOSE 7004
+#
+## Ejecutar la aplicación
+#ENTRYPOINT ["dotnet", "FoodDelivery.Services.OrderAPI.dll"]
