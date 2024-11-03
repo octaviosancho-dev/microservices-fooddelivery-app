@@ -10,7 +10,7 @@ RUN dotnet restore
 COPY ./ ./
 
 # Copiar appsettings.json desde la raíz del proyecto
-COPY ../appsettings.json /app/appsettings.json
+COPY ./appsettings.json /app/appsettings.json
 
 # Compilar y publicar el código
 RUN dotnet publish -c Release -o out
