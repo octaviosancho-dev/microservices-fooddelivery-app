@@ -21,6 +21,7 @@ EXPOSE 7004
 # Ejecutar la aplicación
 ENTRYPOINT ["dotnet", "FoodDelivery.Services.OrderAPI.dll"]
 
+
 ## Etapa de construcción
 #FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
 #WORKDIR /app

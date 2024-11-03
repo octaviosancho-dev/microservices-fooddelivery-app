@@ -13,6 +13,8 @@ namespace FoodDelivery.GatewaySolution.Extensions
             var secret = settingsSection.GetValue<string>("Secret");
             var issuer = settingsSection.GetValue<string>("Issuer");
             var audience = settingsSection.GetValue<string>("Audience");
+            
+            Console.WriteLine($"Secret: {secret}, Issuer: {issuer}, Audience: {audience}");
 
             var key = Encoding.ASCII.GetBytes(secret);
 
