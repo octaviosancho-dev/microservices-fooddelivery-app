@@ -16,14 +16,16 @@ RUN dotnet publish -c Release -o out
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 
-# Copiar el output de la build al runtime
-COPY --from=build-env /app/out . 
+# Copiar el output de la build y el archivo appsettings.json al runtime
+COPY --from=build-env /app/out .
+COPY appsettings.json .
 
 # Exponer puerto
-EXPOSE 7777 
+EXPOSE 7777
 
 # Ejecutar la aplicación
 ENTRYPOINT ["dotnet", "FoodDelivery.GatewaySolution.dll"]
+
 
 
 ## Etapa de construcción
