@@ -10,9 +10,9 @@ namespace FoodDelivery.GatewaySolution.Extensions
         {
             var settingsSection = builder.Configuration.GetSection("ApiSettings");
 
-            var secret = settingsSection.GetValue<string>("Secret");
-            var issuer = settingsSection.GetValue<string>("Issuer");
-            var audience = settingsSection.GetValue<string>("Audience");
+            var secret = settingsSection.GetValue<string>("Secret") ?? Environment.GetEnvironmentVariable("ApiSettings_Secret");
+            var issuer = settingsSection.GetValue<string>("Issuer") ?? Environment.GetEnvironmentVariable("ApiSettings_Issuer");
+            var audience = settingsSection.GetValue<string>("Audience") ?? Environment.GetEnvironmentVariable("ApiSettings_Audience");
             
             Console.WriteLine($"Secret: {secret}, Issuer: {issuer}, Audience: {audience}");
 
