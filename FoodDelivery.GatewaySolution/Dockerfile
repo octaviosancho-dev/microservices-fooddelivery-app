@@ -7,10 +7,7 @@ COPY *.csproj ./
 RUN dotnet restore
 
 # Copiar todo el resto del código del microservicio
-COPY ./ ./
-
-# Copiar appsettings.json desde la raíz del proyecto
-COPY ./FoodDelivery.GatewaySolution/appsettings.json /app/appsettings.json
+COPY . ./
 
 # Compilar y publicar el código
 RUN dotnet publish -c Release -o out
