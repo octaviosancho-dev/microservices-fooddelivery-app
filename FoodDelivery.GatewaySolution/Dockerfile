@@ -6,8 +6,6 @@ WORKDIR /app
 COPY FoodDelivery.GatewaySolution.csproj ./
 RUN dotnet restore
 
-COPY FoodDelivery.GatewaySolution/ocelot.json /app/ocelot.json
-
 # Copiar el resto del código y compilar
 COPY . ./
 RUN dotnet publish -c Release -o /out
