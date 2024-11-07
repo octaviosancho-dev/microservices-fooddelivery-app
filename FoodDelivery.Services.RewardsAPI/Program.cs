@@ -41,7 +41,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-ApplyMigration();
+//ApplyMigration();
 //app.UseAzureServiceBusConsumer();
 app.Run();
 
